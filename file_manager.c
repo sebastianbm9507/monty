@@ -13,6 +13,7 @@ void _open(char *file)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", file);
 		free_nodes();
+		free(v);
 		exit(EXIT_FAILURE);
 	}
 	else
