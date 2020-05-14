@@ -15,7 +15,7 @@ void pop_func(stack_t **stack, unsigned int line)
 	/** Check for more than 1 node ✅*/
 	if (*stack == NULL || stack == NULL)
 	{
-		printf("L%d: can't pop an empty stack\n", line);
+		dprintf(STDERR_FILENO, "L%d: can't pop an empty stack\n", line);
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
@@ -97,7 +97,7 @@ void pint_func(stack_t **stack, unsigned int line)
 	(void)line;
 	if (!*stack || !stack)
 	{
-		printf("L%d: can't pint, stack empty\n", line);
+		dprintf(STDERR_FILENO, "L%d: can't pint, stack empty\n", line);
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
@@ -120,7 +120,7 @@ void swap_func(stack_t **stack, unsigned int line)
 	(void)line;
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		printf("L%d: can't swap, stack too short\n", line);
+		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line);
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
