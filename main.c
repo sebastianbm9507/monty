@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	/* checking argc has a valid number */
 	if (argc != 2)
 	{
-		printf("USAGE: monty file\n");
+		dprintf(STDERR_FILENO, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	v = malloc(sizeof(var));
@@ -35,7 +35,7 @@ stack_t *create_node(int n)
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
-		printf("Error: malloc failed\n");
+		dprintf(STDERR_FILENO, "Error: malloc failed\n");
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
