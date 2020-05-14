@@ -8,7 +8,7 @@ void _open(char *file)
 {
 	FILE *fd;
 
-	if (access(file, R_OK) != 0)
+	if (access(file, R_OK) != 0 || file == NULL)
 	{
 		printf("Error: Can't open file %s\n", file);
 		exit(EXIT_FAILURE);
@@ -21,10 +21,10 @@ void _open(char *file)
 			printf("Error: Can't open file %s\n", file);
 			exit(EXIT_FAILURE);
 		}
-		/** Go to read the file 📄*/
-		_readfile(fd);
-		/* Close the file ❌*/
-		fclose(fd);
+	/** Go to read the file 📄*/
+	_readfile(fd);
+	/* Close the file ❌*/
+	fclose(fd);
 	}
 }
 /**
@@ -34,7 +34,7 @@ void _open(char *file)
  */
 void _readfile(FILE *fd)
 {
-	/** read all the file */
+  /** read all the file */
 	int line;
 	char *linestr = NULL;
 	size_t n;
@@ -55,6 +55,11 @@ void _read_lines(char *linesrt, int line)
 	char *opcode = NULL;
 	char *value = NULL;
 
+	if (linesrt == NULL)
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	opcode = strtok(linesrt, "\n ");
 	if (opcode == NULL)
 		return;
@@ -71,14 +76,16 @@ void _read_lines(char *linesrt, int line)
  */
 void find_fn(char *opcode, char *val, int line)
 {
-	stack_t *node;	   /** variable to store the node ⏺ */
+	stack_t *node; /** variable to store the node ⏺ */
 	int i, j, neg = 1; /** counter variables 🔀 */
 	instruction_t list[] = {
-		{"pop", pop_func}, {"push", push_func}, {"pall", pall_func},
-		{"pint", pint_func}, {"swap", swap_func}, {"add", add_func},
-		{"nop", nop_func}, {"sub", sub_func}};
+	{"pop", pop_func}, {"push", push_func},	{"pall", pall_func}, {"pint",
+	pint_func}, {"swap", swap_func}, {"add", add_func}, {"nop", nop_func},
+	{"sub", sub_func}, {NULL, NULL}};
+	if (opcode[0] == '#')
+		return;
 	for (i = 0; list[i].opcode != NULL; i++)
-	{											 /** go through the list to find the function 🔁*/
+	{ /** go through the list to find the function 🔁*/
 		if (strcmp(opcode, list[i].opcode) == 0) /* Check if the opcode exist ✅ */
 		{
 			if (strcmp(opcode, "push") == 0)
@@ -86,24 +93,23 @@ void find_fn(char *opcode, char *val, int line)
 				if (val != NULL && val[0] == '-')
 					val = val + 1, neg = -1;
 				if (val == NULL)
-					error_handler(5, opcode, line); /* case 5 error */
+				error_handler(5, opcode, line); /* case 5 error */
 				for (j = 0; val[j] != '\0'; j++)
 				{
 					if (isdigit(val[j]) == 0) /* case 5 error */
-						error_handler(5, opcode, line);
+					error_handler(5, opcode, line);
 				}
 				node = create_node(atoi(val) * neg); /* Create node */
-				node = node;
-				list[i].f(&node, line);
+				node = node, list[i].f(&node, line);
 				break;
 			}
 			else
 			{
-				list[i].f(&head, line);
-				break;
+					list[i].f(&head, line);
+					break;
 			}
 		}
 	}
-	if (list[i].opcode == NULL)
+		if (list[i].opcode == NULL)
 		error_handler(3, opcode, line); /* Unknow instruction Error*/
 }
