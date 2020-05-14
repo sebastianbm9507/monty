@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * add_func - adds the top two elements of the stack.
  * @stack: Head of the list
@@ -8,20 +9,23 @@
 void add_func(stack_t **stack, unsigned int line)
 {
 	int result;
-	(void)stack;
 	(void)line;
 
-	if (head->next == NULL || head == NULL)
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't add, stack too short\n", line);
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
+		free(v);
 		exit(EXIT_FAILURE);
 	}
 
-	head = head->next;
-	result = head->n + head->prev->n;
-	head->n = result;
-	free(head->prev);
-	head->prev = NULL;
+	(*stack) = (*stack)->next;
+	result = (*stack)->n + (*stack)->prev->n;
+	(*stack)->n = result;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 }
 /**
  * nop_func - Do nothing
@@ -43,18 +47,21 @@ void nop_func(stack_t **stack, unsigned int line_number)
 void sub_func(stack_t **stack, unsigned int line)
 {
 	int result;
-	(void)stack;
 	(void)line;
 
-	if (head->next == NULL || head == NULL)
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't sub, stack too short\n", line);
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
+		free(v);
 		exit(EXIT_FAILURE);
 	}
 
-	head = head->next;
-	result = head->n - head->prev->n;
-	head->n = result;
-	free(head->prev);
-	head->prev = NULL;
+	(*stack) = (*stack)->next;
+	result = (*stack)->n - (*stack)->prev->n;
+	(*stack)->n = result;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 }
