@@ -20,5 +20,8 @@ void error_handler(int ID_case, char *opcode, int line)
 			break;
 	}
 	free_nodes();
+	free(v->linestr);
+	fclose(v->fd);
+	free(v);
 	exit(EXIT_FAILURE);
 }
