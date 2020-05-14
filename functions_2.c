@@ -8,14 +8,10 @@
 void add_func(stack_t **stack, unsigned int line)
 {
 	int result;
-	(void) stack;
-	(void) line;
+	(void)stack;
+	(void)line;
 
-
-	if (head == NULL || head->next == NULL)
-		printf("error");
-
-	if (head->next == NULL)
+	if (head->next == NULL || head == NULL)
 	{
 		printf("L%d: can't add, stack too short\n", line);
 		exit(EXIT_FAILURE);
@@ -47,14 +43,10 @@ void nop_func(stack_t **stack, unsigned int line_number)
 void sub_func(stack_t **stack, unsigned int line)
 {
 	int result;
-	(void) stack;
-	(void) line;
+	(void)stack;
+	(void)line;
 
-
-	if (head == NULL || head->next == NULL)
-		printf("error");
-
-	if (head->next == NULL)
+	if (head->next == NULL || head == NULL)
 	{
 		printf("L%d: can't sub, stack too short\n", line);
 		exit(EXIT_FAILURE);
