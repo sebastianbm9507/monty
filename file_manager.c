@@ -75,10 +75,10 @@ void find_fn(char *opcode, char *val, int line)
 	int i, j; /** counter variables 🔀 */
 	instruction_t list[] = {
 	{"pop", pop_func}, {"push", push_func},	{"pall", pall_func}, {"pint",
-	pint_func}, {"swap", swap_func}, {"add", add_func}, {"nop", nop_func}};
-	/** go through the list to find the function 🔁*/
+	pint_func}, {"swap", swap_func}, {"add", add_func}, {"nop", nop_func},
+	{"sub", sub_func}};
 	for (i = 0; list[i].opcode != NULL; i++)
-	{
+	{ /** go through the list to find the function 🔁*/
 		if (strcmp(opcode, list[i].opcode) == 0) /* Check if the opcode exist ✅ */
 		{
 			if (strcmp(opcode, "push") == 0)
