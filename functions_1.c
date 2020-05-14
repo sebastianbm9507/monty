@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * pop_func - Removes the top node
  * @stack: Head of the list
@@ -12,18 +13,21 @@ void pop_func(stack_t **stack, unsigned int line)
 	temp = *stack;
 	(void)line;
 	/** Check for more than 1 node ✅*/
-	if (head == NULL)
+	if (*stack == NULL || stack == NULL)
 	{
 		printf("L%d: can't pop an empty stack\n", line);
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
 		exit(EXIT_FAILURE);
 	}
 	if (temp->next != NULL)
 	{
-		head = head->next;
-		head->prev = NULL;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
 	}
 	else
-		head = NULL;
+		*stack = NULL;
 	free(temp);
 }
 /**
@@ -38,16 +42,22 @@ void push_func(stack_t **node, unsigned int line)
 
 	(void)line;
 	if (node == NULL || *node == NULL)
-		exit(EXIT_FAILURE);
-	if (head == NULL)
 	{
-		head = *node;
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
+		free(v);
+		exit(EXIT_FAILURE);
+	}
+	if (v->head == NULL)
+	{
+		v->head = *node;
 		return;
 	}
-	temp = head;
-	head = *node;
-	head->next = temp;
-	temp->prev = head;
+	temp = v->head;
+	v->head = *node;
+	v->head->next = temp;
+	temp->prev = v->head;
 }
 /**
  * pall_func - Print the list
@@ -61,8 +71,14 @@ void pall_func(stack_t **stack, unsigned int line)
 
 	temp = *stack;
 	(void)line;
-	if (head == NULL)
+	if (*stack == NULL)
+	{
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
+		free(v);
 		exit(EXIT_FAILURE);
+	}
 	while (temp)
 	{
 		printf("%d\n", temp->n);
@@ -82,9 +98,13 @@ void pint_func(stack_t **stack, unsigned int line)
 	if (!*stack || !stack)
 	{
 		printf("L%d: can't pint, stack empty\n", line);
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
+		free(v);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", head->n);
+	printf("%d\n", (*stack)->n);
 }
 /**
  * swap_func - swaps the top two elements of the stack.
@@ -98,26 +118,31 @@ void swap_func(stack_t **stack, unsigned int line)
 
 	temp = *stack;
 	(void)line;
-	if (temp->next == NULL || stack == NULL || *stack == NULL)
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%d: can't swap, stack too short\n", line);
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
+		free(v);
 		exit(EXIT_FAILURE);
 	}
+
 	if (temp->next->next == NULL)
 	{
-		head = temp->next;
-		head->next = temp;
-		head->prev = NULL;
+		*stack = temp->next;
+		(*stack)->next = temp;
+		(*stack)->prev = NULL;
 		temp->next = NULL;
-		temp->prev = head;
+		temp->prev = *stack;
 	}
 	else
 	{
-		head = temp->next;
-		temp->next = head->next;
-		head->next->prev = temp;
-		head->prev = NULL;
-		head->next = temp;
-		temp->prev = head;
+		(*stack) = temp->next;
+		temp->next = (*stack)->next;
+		(*stack)->next->prev = temp;
+		(*stack)->prev = NULL;
+		(*stack)->next = temp;
+		temp->prev = *stack;
 	}
 }
