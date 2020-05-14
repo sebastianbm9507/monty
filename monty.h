@@ -36,11 +36,23 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t *head;
+/**
+ * struct _globales - struct for global variables
+ * @linestr: string of the getline
+ * @fd: file descriptor
+ * @head: the head of the stack
+ */
+typedef struct _globales
+{
+	char *linestr;
+	FILE *fd;
+	stack_t *head;
+} var;
 
+var *v;
 void _open(char *file);
-void _readfile(FILE *fd);
-void _read_lines(char *linesrt, int line);
+void _readfile(void);
+void _read_lines(int line);
 void call_func(char *op, char *val);
 void find_fn(char *opcode, char *val, int line);
 stack_t *create_node(int n);
