@@ -51,5 +51,6 @@ void pint_func(stack_t **node, unsigned int line_number);
 void swap_func(stack_t **node, unsigned int line);
 void add_func(stack_t **node, unsigned int line);
 void nop_func(stack_t **node, unsigned int line);
+void sub_func(stack_t **stack, unsigned int line);
 void free_nodes(void);
 #endif /* LISTS_H */
