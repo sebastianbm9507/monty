@@ -26,7 +26,7 @@ void _open(char *file)
 			exit(EXIT_FAILURE);
 		}
 		/** Go to read the file 📄*/
-		_readfile(v->fd);
+		_readfile();
 		/* Close the file ❌*/
 		fclose(v->fd);
 	}
