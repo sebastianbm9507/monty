@@ -11,7 +11,7 @@ void error_handler(int ID_case, char *opcode, int line)
 	switch (ID_case)
 	{
 		case 3:
-			dprintf(STDERR_FILENO ,"L%d: unknown instruction %s\n", line, opcode);
+			dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", line, opcode);
 			break;
 		case 5:
 			dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line);
