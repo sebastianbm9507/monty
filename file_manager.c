@@ -59,7 +59,7 @@ void _read_lines(int line)
 
 	if (v->linestr == NULL)
 	{
-		printf("Error: malloc failed\n");
+		dprintf(STDERR_FILENO, "Error: malloc failed\n");
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
