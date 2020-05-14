@@ -1,7 +1,5 @@
 #include "monty.h"
 
-/* global variable */
-stack_t *head = NULL;
 /**
  * main - Main function
  * @argc: int variable to handle number or arguments
@@ -10,14 +8,19 @@ stack_t *head = NULL;
  */
 int main(int argc, char **argv)
 {
-  /* checking argc has a valid number */
+	/* checking argc has a valid number */
 	if (argc != 2)
 	{
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+	v = malloc(sizeof(var));
+	v->fd = NULL;
+	v->linestr = NULL;
+	v->head = NULL;
 	_open(argv[1]);
 	free_nodes();
+	free(v);
 	return (0);
 }
 /**
@@ -29,11 +32,14 @@ stack_t *create_node(int n)
 {
 	stack_t *new_node;
 
-
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
-		printf("Node can't be created");
+		printf("Error: malloc failed\n");
+		free_nodes();
+		fclose(v->fd);
+		free(v->linestr);
+		free(v);
 		exit(EXIT_FAILURE);
 	}
 	new_node->next = NULL;
@@ -50,13 +56,13 @@ void free_nodes(void)
 {
 	stack_t *tmp;
 
-	if (head == NULL)
+	if (v->head == NULL)
 		return;
 
-	while (head != NULL)
+	while (v->head != NULL)
 	{
-		tmp = head;
-		head = head->next;
+		tmp = v->head;
+		v->head = v->head->next;
 		free(tmp);
 	}
 }
