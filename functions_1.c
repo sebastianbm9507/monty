@@ -19,8 +19,10 @@ void pop_func(stack_t **stack, unsigned int line)
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
+		free(v);
 		exit(EXIT_FAILURE);
 	}
+
 	if (temp->next != NULL)
 	{
 		*stack = (*stack)->next;
