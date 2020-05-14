@@ -13,7 +13,7 @@ void add_func(stack_t **stack, unsigned int line)
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		printf("L%d: can't add, stack too short\n", line);
+		dprintf(STDERR_FILENO, "L%d: can't add, stack too short\n", line);
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
@@ -51,7 +51,7 @@ void sub_func(stack_t **stack, unsigned int line)
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		printf("L%d: can't sub, stack too short\n", line);
+		dprintf(STDERR_FILENO, "L%d: can't sub, stack too short\n", line);
 		free_nodes();
 		fclose(v->fd);
 		free(v->linestr);
