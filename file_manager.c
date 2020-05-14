@@ -11,7 +11,7 @@ void _open(char *file)
 
 	if (access(file, R_OK) != 0 || file == NULL)
 	{
-		printf("Error: Can't open file %s\n", file);
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", file);
 		free_nodes();
 		exit(EXIT_FAILURE);
 	}
@@ -20,7 +20,7 @@ void _open(char *file)
 		v->fd = fopen(file, "r");
 		if (v->fd == NULL)
 		{
-			printf("Error: Can't open file %s\n", file);
+			dprintf(STDERR_FILENO, "Error: Can't open file %s\n", file);
 			free_nodes();
 			free(v);
 			exit(EXIT_FAILURE);
