@@ -8,7 +8,8 @@
  */
 void rotl_func(stack_t **stack, unsigned int line)
 {
-
+	(void)stack;
+	(void)line;
 }
 /**
  * rotr_func - rotates the stack to the bottom.
@@ -19,5 +20,6 @@ void rotl_func(stack_t **stack, unsigned int line)
  */
 void rotr_func(stack_t **stack, unsigned int line)
 {
-
+	(void)stack;
+	(void)line;
 }
