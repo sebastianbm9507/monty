@@ -140,7 +140,7 @@ void pstr_func(stack_t **stack, unsigned int line)
 	}
 	while (temp)
 	{
-		if (((temp)->n >= 0 && (temp)->n <= 127) || ((temp)->n != 0))
+		if (((temp)->n > 0 && (temp)->n <= 127) || ((temp)->n != 0))
 		{
 			printf("%c", temp->n);
 			temp = temp->next;
