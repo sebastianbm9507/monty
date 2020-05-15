@@ -64,6 +64,8 @@ void swap_func(stack_t **node, unsigned int line);
 void add_func(stack_t **node, unsigned int line);
 void nop_func(stack_t **node, unsigned int line);
 void sub_func(stack_t **stack, unsigned int line);
+void mul_fun(stack_t **stack, unsigned int line);
+void div_fun(stack_t **stack, unsigned int line);
 void free_nodes(void);
 void error_handler(int ID_case, char *opcode, int line);
 #endif /* LISTS_H */
