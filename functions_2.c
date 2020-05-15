@@ -66,12 +66,12 @@ void sub_func(stack_t **stack, unsigned int line)
 	(*stack)->prev = NULL;
 }
 /**
- * mul_fun - divs the top two elements of the stack.
+ * mul_func - divs the top two elements of the stack.
  * @stack: Head of the list
  * @line: line of file
  * Return: Nothing
  */
-void mul_fun(stack_t **stack, unsigned int line)
+void mul_func(stack_t **stack, unsigned int line)
 {
 	int result;
 	(void)line;

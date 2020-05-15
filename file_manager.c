@@ -78,7 +78,7 @@ void find_fn(char *opcode, char *val, int line)
 		{"pop", pop_func}, {"push", push_func}, {"pall", pall_func},
 		{"pint", pint_func}, {"swap", swap_func}, {"add", add_func},
 		{"nop", nop_func}, {"sub", sub_func}, {"mul", mul_func},
-		{"div", div_func}, {"mod", mod_func},, {NULL, NULL}};
+		{"div", div_func}, {"mod", mod_func}, {NULL, NULL}};
 	if (opcode[0] == '#')
 		return;
 	for (i = 0; list[i].opcode != NULL; i++)
