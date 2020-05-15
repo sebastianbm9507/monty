@@ -67,6 +67,10 @@ void sub_func(stack_t **stack, unsigned int line);
 void mul_func(stack_t **stack, unsigned int line);
 void div_func(stack_t **stack, unsigned int line);
 void mod_func(stack_t **stack, unsigned int line);
+void pchar_func(stack_t **stack, unsigned int line);
+void pstr_func(stack_t **stack, unsigned int line);
+void rotl_func(stack_t **stack, unsigned int line);
+void rotr_func(stack_t **stack, unsigned int line);
 void free_nodes(void);
 void error_handler(int ID_case, char *opcode, int line);
 #endif /* LISTS_H */
