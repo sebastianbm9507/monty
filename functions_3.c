@@ -148,4 +148,5 @@ void pstr_func(stack_t **stack, unsigned int line)
 		else
 			break;
 	}
+	printf("\n");
 }
