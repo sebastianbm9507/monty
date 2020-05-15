@@ -8,12 +8,15 @@
  */
 void rotl_func(stack_t **stack, unsigned int line)
 {
+
 	stack_t *tmp;
+	(void)line;
+
+	tmp = *stack;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 		return;
 
-	tmp = *stack;
 	/* go to last node 🔁 */
 	while (tmp->next != NULL)
 		tmp = tmp->next;
@@ -33,12 +36,15 @@ void rotl_func(stack_t **stack, unsigned int line)
  */
 void rotr_func(stack_t **stack, unsigned int line)
 {
+
 	stack_t *tmp;
+	(void)line;
+
+	tmp = *stack;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 		return;
 
-	tmp = *stack;
 	/* go to last node 🔁 */
 	while (tmp->next != NULL)
 		tmp = tmp->next;
