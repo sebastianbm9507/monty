@@ -8,12 +8,9 @@
  */
 void pop_func(stack_t **stack, unsigned int line)
 {
-	stack_t *temp;
+	stack_t *tmp;
 
-	temp = *stack;
-	(void)line;
-	/** Check for more than 1 node ✅*/
-	if (*stack == NULL || stack == NULL)
+	if (*stack == NULL)
 	{
 		dprintf(STDERR_FILENO, "L%d: can't pop an empty stack\n", line);
 		free_nodes();
@@ -22,14 +19,14 @@ void pop_func(stack_t **stack, unsigned int line)
 		free(v);
 		exit(EXIT_FAILURE);
 	}
-	if (temp->next != NULL)
-	{
-		*stack = (*stack)->next;
-		(*stack)->prev = NULL;
-	}
 	else
-		*stack = NULL;
-	free(temp);
+	{
+		tmp = *stack;
+		if (tmp->next != NULL)
+			tmp->next->prev = NULL;
+		*stack = (*stack)->next;
+		free(tmp);
+	}
 }
 /**
  * push_func - Appends a node on top of list
