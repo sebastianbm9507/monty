@@ -68,14 +68,7 @@ void pall_func(stack_t **stack, unsigned int line)
 
 	temp = *stack;
 	(void)line;
-	if (*stack == NULL)
-	{
-		free_nodes();
-		fclose(v->fd);
-		free(v->linestr);
-		free(v);
-		exit(EXIT_FAILURE);
-	}
+
 	while (temp)
 	{
 		printf("%d\n", temp->n);
