@@ -82,7 +82,6 @@ void find_fn(char *opcode, char *val, int line)
 		{"pstr", pstr_func}, {"rotl", rotl_func}, {"rotr", rotr_func},
 		{ NULL, NULL }
 	};
-
 if (opcode[0] == '#')
 	return;
 for (i = 0; list[i].opcode != NULL; i++)
