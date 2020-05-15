@@ -15,6 +15,8 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	v = malloc(sizeof(var));
+	if (v == NULL)
+		dprintf(STDERR_FILENO, "Error: malloc failed\n");
 	v->fd = NULL;
 	v->linestr = NULL;
 	v->head = NULL;
