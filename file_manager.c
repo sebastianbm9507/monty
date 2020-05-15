@@ -78,34 +78,38 @@ void find_fn(char *opcode, char *val, int line)
 		{"pop", pop_func}, {"push", push_func}, {"pall", pall_func},
 		{"pint", pint_func}, {"swap", swap_func}, {"add", add_func},
 		{"nop", nop_func}, {"sub", sub_func}, {"mul", mul_func},
-		{"div", div_func}, {"mod", mod_func}, {NULL, NULL}};
-	if (opcode[0] == '#')
-		return;
-	for (i = 0; list[i].opcode != NULL; i++)
-	{											 /** go through the list to find the function 🔁*/
-		if (strcmp(opcode, list[i].opcode) == 0) /* Check if the opcode exist ✅ */
+		{"div", div_func}, {"mod", mod_func}, {"pchar", pchar_func},
+		{"pstr", pstr_func}, {"rotl", rotl_func}, {"rotr", rotr_func},
+		{ NULL, NULL }
+	};
+
+if (opcode[0] == '#')
+	return;
+for (i = 0; list[i].opcode != NULL; i++)
+{											 /** go through the list to find the function 🔁*/
+	if (strcmp(opcode, list[i].opcode) == 0) /* Check if the opcode exist ✅ */
+	{
+		if (strcmp(opcode, "push") == 0)
 		{
-			if (strcmp(opcode, "push") == 0)
+			if (val != NULL && val[0] == '-')
+				val = val + 1, neg = -1;
+			if (val == NULL)
+				error_handler(5, opcode, line); /* case 5 error */
+			for (j = 0; val[j] != '\0'; j++)
 			{
-				if (val != NULL && val[0] == '-')
-					val = val + 1, neg = -1;
-				if (val == NULL)
-					error_handler(5, opcode, line); /* case 5 error */
-				for (j = 0; val[j] != '\0'; j++)
-				{
-					if (isdigit(val[j]) == 0) /* case 5 error */
-						error_handler(5, opcode, line);
-				}
-				node = create_node(atoi(val) * neg); /* Create node */
-				node = node, list[i].f(&node, line);
-				break;
+				if (isdigit(val[j]) == 0) /* case 5 error */
+					error_handler(5, opcode, line);
 			}
-			else
-			{
-				list[i].f(&v->head, line);
-				break;
-			}
+			node = create_node(atoi(val) * neg); /* Create node */
+			node = node, list[i].f(&node, line);
+			break;
 		}
+		else
+		{
+			list[i].f(&v->head, line);
+			break;
+		}
+	}
 	}
 	if (list[i].opcode == NULL)
 		error_handler(3, opcode, line); /* Unknow instruction Error*/
