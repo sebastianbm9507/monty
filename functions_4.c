@@ -8,18 +8,19 @@
  */
 void rotl_func(stack_t **stack, unsigned int line)
 {
-	(void)stack;
-	(void)line;
-}
-/**
- * rotr_func - rotates the stack to the bottom.
- * rotates the stack to the bottom.
- * @stack: Head of the list
- * @line: line of file
- * Return: Nothing
- */
-void rotr_func(stack_t **stack, unsigned int line)
-{
-	(void)stack;
-	(void)line;
+	stack_t *tmp;
+
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+		return;
+
+	tmp = *stack;
+	/* go to last node 🔁 */
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+
+	tmp->next = *stack;
+	(*stack)->prev = tmp;
+	*stack = (*stack)->next;
+	(*stack)->prev->next = NULL;
+	(*stack)->prev = NULL;
 }
