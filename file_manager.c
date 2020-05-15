@@ -56,10 +56,10 @@ void _read_lines(int line)
 		free(v);
 		exit(EXIT_FAILURE);
 	}
-	opcode = strtok(v->linestr, " \t\n");
+	opcode = strtok(v->linestr, " \r\t\n");
 	if (opcode == NULL)
 		return;
-	value = strtok(NULL, " \t\n");
+	value = strtok(NULL, " \r\t\n");
 	find_fn(opcode, value, line);
 }
 /**
