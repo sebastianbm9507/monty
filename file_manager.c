@@ -8,16 +8,6 @@
  */
 void _open(char *file)
 {
-
-	if (access(file, R_OK) != 0 || file == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", file);
-		free_nodes();
-		free(v);
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
 		v->fd = fopen(file, "r");
 		if (v->fd == NULL)
 		{
@@ -30,7 +20,6 @@ void _open(char *file)
 		_readfile();
 		/* Close the file ❌*/
 		fclose(v->fd);
-	}
 }
 /**
  * _readfile - function to read the lines of the opened file
